@@ -1,7 +1,11 @@
+import { AppleSignIn } from '@/app/apple/AppleSignIn'
 import Image from "next/image";
 import styles from "./page.module.css";
 
+
 export default function Home() {
+
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -19,6 +23,7 @@ export default function Home() {
           </li>
           <li>Save and see your changes instantly.</li>
         </ol>
+        <AppleSignIn />
 
         <div className={styles.ctas}>
           <a
