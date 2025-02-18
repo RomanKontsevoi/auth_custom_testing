@@ -1,0 +1,42 @@
+.page {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #FAFAFA;
+  flex-direction: column;
+}
+
+.mainCard {
+  &Wrapper {
+    display: flex;
+    max-width: 500px;
+    margin: auto;
+    background-color: #fff;
+  }
+
+  &Social {
+    &Wrapper {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+  }
+}
+
+.footer {
+  //grid-row-start: 3;
+  display: flex;
+  gap: 24px;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  img {
+    flex-shrink: 0;
+  }
+}
