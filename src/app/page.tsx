@@ -1,11 +1,9 @@
-import { AppleSignIn } from '@/app/apple/AppleSignIn'
-import { GoogleSignIn } from '@/app/google/GoogleSignIn'
+import { AppleSignIn } from '@/app/components/apple/AppleSignIn'
+import { GoogleSignIn } from '@/app/components/google/GoogleSignIn'
 import s from './page.module.scss'
 
 
 export default function Home() {
-
-
   return (
     <div className={s.page}>
       <div className={s.mainCardWrapper}>
@@ -19,5 +17,5 @@ export default function Home() {
         AAM Custom Auth testing
       </footer>
     </div>
-  );
+  )
 }
