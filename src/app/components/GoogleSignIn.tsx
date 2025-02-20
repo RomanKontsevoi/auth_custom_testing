@@ -1,13 +1,25 @@
 'use client'
+import { imagesPrefix } from '@/app/consts'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import React, { useEffect } from 'react'
 
-// const getGoogleLoginURL = 'https://localhost:3001/api/v1/auth/custom/google?returnTo=http://localhost:3000'
 const getUserByGoogle = 'https://localhost:3001/api/v1/auth/custom/login/google'
 
 interface IGoogleSignInProps {
   className?: string
+}
+
+interface IGoogleSessionUser {
+  name: string
+  email: string
+  image: string
+}
+
+interface IGoogleSession {
+  user: IGoogleSessionUser,
+  expires: string
+  accessToken: string
 }
 
 export const GoogleSignIn: React.FC<IGoogleSignInProps> = ({
@@ -15,10 +27,11 @@ export const GoogleSignIn: React.FC<IGoogleSignInProps> = ({
 }) => {
   const { data: session } = useSession()
 
-  const { user, accessToken } = session ?? {}
+  const { user, accessToken } = session as IGoogleSession ?? {}
+
+  console.log({ user, accessToken })
 
   useEffect(() => {
-    console.log({ user, accessToken })
     if (user?.email) {
       const fetchUserData = async () => {
         try {
@@ -37,7 +50,7 @@ export const GoogleSignIn: React.FC<IGoogleSignInProps> = ({
 
       fetchUserData()
     }
-  }, [user?.email])
+  }, [user?.email, accessToken])
 
   console.log({ session })
 
@@ -50,7 +63,7 @@ export const GoogleSignIn: React.FC<IGoogleSignInProps> = ({
           <Image
             width={24}
             height={24}
-            src="https://aamotorswebapp800a.blob.core.windows.net/str-b2c/Google.svg"
+            src={`${imagesPrefix}Google.svg`}
             alt="Sign In with Google"
           />
         </button>

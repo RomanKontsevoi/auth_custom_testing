@@ -1,4 +1,5 @@
 'use client'
+import { imagesPrefix } from '@/app/consts'
 import Image from 'next/image'
 import React from 'react'
 
@@ -17,7 +18,7 @@ export const AppleSignIn: React.FC<IAppleleSignInProps> = ({
       <Image
         width={24}
         height={24}
-        src="https://aamotorswebapp800a.blob.core.windows.net/str-b2c/AppleLogo.png"
+        src={`${imagesPrefix}AppleLogo.png`}
         alt="Sign In with Apple"
       />
     </a>

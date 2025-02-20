@@ -1,10 +1,10 @@
 import { AppleSignIn } from '@/app/components/AppleSignIn'
 import { FacebookSignIn } from '@/app/components/FacebookSignIn'
 import { GoogleSignIn } from '@/app/components/GoogleSignIn'
+import { imagesPrefix } from '@/app/consts'
 import Image from 'next/image'
 import s from './page.module.scss'
 import cn from 'classnames'
-
 
 export default function Home() {
   return (
@@ -15,7 +15,7 @@ export default function Home() {
             <Image
               width={156}
               height={32}
-              src="https://aamotorswebapp800a.blob.core.windows.net/str-b2c/aamlogo.svg"
+              src={`${imagesPrefix}aamlogo.svg`}
               alt="Al Abdulghani Motors"
             />
           </div>
@@ -24,35 +24,35 @@ export default function Home() {
               width={20}
               height={16}
               className="!w-auto" data-tenant-branding-logo="true"
-              src="https://aamotorswebapp800a.blob.core.windows.net/str-b2c/toyotalogo.svg"
+              src={`${imagesPrefix}toyotalogo.svg`}
               alt="Toyota Qatar"
             />
             <Image
               width={2}
               height={16}
               className={s.mainCardHeaderRight}
-              src="https://aamotorswebapp800a.blob.core.windows.net/str-b2c/divider.png"
+              src={`${imagesPrefix}divider.png`}
               alt="Divider"
             />
             <Image
               width={23}
               height={16}
               className="!w-auto" data-tenant-branding-logo="true"
-              src="https://aamotorswebapp800a.blob.core.windows.net/str-b2c/lexus.svg"
+              src={`${imagesPrefix}lexus.svg`}
               alt="Lexus Qatar"
             />
             <Image
               width={2}
               height={16}
               className={s.mainCardHeaderRight}
-              src="https://aamotorswebapp800a.blob.core.windows.net/str-b2c/divider.png"
+              src={`${imagesPrefix}divider.png`}
               alt="Divider"
             />
             <Image
               width={64}
               height={16}
               className="!w-auto" data-tenant-branding-logo="true"
-              src="https://aamotorswebapp800a.blob.core.windows.net/str-b2c/kintologo.svg"
+              src={`${imagesPrefix}kintologo.svg`}
               alt="Kinto"
             />
           </div>
