@@ -1,5 +1,5 @@
 'use client'
-import { imagesPrefix } from '@/app/consts'
+import { imagesPrefix } from 'app/consts'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import React, { useEffect } from 'react'

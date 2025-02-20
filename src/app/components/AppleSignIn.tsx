@@ -1,5 +1,5 @@
 'use client'
-import { imagesPrefix } from '@/app/consts'
+import { imagesPrefix } from 'app/consts'
 import Image from 'next/image'
 import React from 'react'
 
