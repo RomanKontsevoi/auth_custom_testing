@@ -1,10 +1,10 @@
 'use client'
 import { imagesPrefix } from 'app/consts'
+import { fetchUserData } from 'app/services/auth'
+import { AuthState, Tokens, useStore } from 'app/store'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import React, { useEffect } from 'react'
-
-const getUserByGoogle = 'https://localhost:3001/api/v1/auth/custom/login/google'
 
 interface IGoogleSignInProps {
   className?: string
@@ -23,52 +23,44 @@ interface IGoogleSession {
 }
 
 export const GoogleSignIn: React.FC<IGoogleSignInProps> = ({
-  className,
+  className
 }) => {
   const { data: session } = useSession()
+  const setTokens = useStore((state) => state.setTokens)
+  const accessToken = useStore((state) => state.accessToken)
 
-  const { user, accessToken } = session as IGoogleSession ?? {}
+  const { user, accessToken: googleAccessToken } = session as IGoogleSession ?? {}
 
   console.log({ user, accessToken })
 
   useEffect(() => {
     if (user?.email) {
-      const fetchUserData = async () => {
-        try {
-          const res = await fetch(getUserByGoogle, {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${accessToken}`
-            }
-          })
-          const json = await res.json()
-          console.log(json)
-        } catch (e) {
-          console.error(e)
-        }
+      const getAndSaveUserData = async () => {
+        const tokens: Tokens = await fetchUserData(googleAccessToken)
+
+        setTokens(tokens)
       }
 
-      fetchUserData()
+      getAndSaveUserData()
     }
-  }, [user?.email, accessToken])
+  }, [user?.email, googleAccessToken])
 
-  console.log({ session })
+  const handleLoginButtonClick = async () => {
+    if (session) {
+      await signOut()
+    }
+
+    await signIn('google')
+  }
 
   return (
-    <>
-      {session ? (
-        <button className={className} onClick={() => signOut()}>Sign Out</button>
-      ) : (
-        <button className={className} onClick={() => signIn('google')}>
-          <Image
-            width={24}
-            height={24}
-            src={`${imagesPrefix}Google.svg`}
-            alt="Sign In with Google"
-          />
-        </button>
-      )}
-    </>
-
+    <button className={className} onClick={handleLoginButtonClick}>
+      <Image
+        width={24}
+        height={24}
+        src={`${imagesPrefix}Google.svg`}
+        alt="Sign In with Google"
+      />
+    </button>
   )
 }

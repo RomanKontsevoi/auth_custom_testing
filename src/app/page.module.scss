@@ -1,99 +1,9 @@
-.page {
-  display: flex;
-  width: 100%;
-  min-height: 100vh;
-  justify-content: center;
-  align-items: center;
-  background-color: #FAFAFA;
-  flex-direction: column;
-  padding: 20px;
-
-  @media screen and (max-width: 500px) {
-    padding: 16px;
-  }
-
-  @media screen and (max-width: 430px) {
-    padding: 10px;
-  }
-}
-
 .mainCard {
-  &Wrapper {
-    display: flex;
-    flex-direction: column;
-    max-width: 500px;
-    width: 100%;
-    margin: auto;
-    background-color: #fff;
-    padding: 80px 60px;
-    border-radius: 32px;
-    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
-
-    @media screen and (max-width: 500px) {
-      padding: 80px 30px;
-    }
-
-    @media screen and (max-width: 430px) {
-      padding: 80px 16px;
-    }
-  }
-
-  &Header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    &Left {
-      height: 40px;
-    }
-
-    &Right {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-
-      &Divider {
-
-      }
-    }
-  }
-
   &Buttons {
     margin-top: 56px;
     display: flex;
     gap: 20px;
     flex-direction: column;
-  }
-
-  &Button {
-    height: 58px;
-    padding: 16px 24px;
-    font-weight: 500;
-    border-radius: 8px;
-    font-size: 16px;
-
-    &:hover {
-      background-color: #fff;
-      color: #000;
-      transition: background-color .2s, color .2s, border-color .2s;
-      cursor: pointer;
-    }
-
-    &Primary {
-      background-color: #00383D;
-      color: #fff;
-      border: 1px solid #00383D;
-    }
-
-    &Secondary {
-      background-color: #fff;
-      color: #00383D;
-      border: 1px solid #E6E6E6;
-
-      &:hover {
-        border: 1px solid #00383D;
-      }
-    }
   }
 
   &Divider {
