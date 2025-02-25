@@ -3,33 +3,34 @@ import cn from 'classnames'
 import Link from 'next/link'
 import React from 'react'
 
-interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
+interface ButtonProps extends React.HTMLProps<HTMLButtonElement | HTMLAnchorElement> {
   theme?: 'primary' | 'secondary'
-  type?: 'button' | 'link'
+  mode?: 'button' | 'link'
   href?: string
   onClick?: () => void
 }
 
 export const Button: React.FC<ButtonProps> = ({
   theme = 'primary',
-  type = 'button',
+  mode = 'button',
   href,
   onClick,
+  className,
   children
 }) => {
-  const className = cn(s.button, {
+  const internalClassName = cn(s.button, {
     [s.buttonPrimary]: theme === 'primary',
     [s.buttonSecondary]: theme === 'secondary'
   })
 
-  if (type === 'link') {
+  if (mode === 'link') {
     if (!href) {
       return 'Provide a href to the link'
     }
 
     return (
       <Link
-        className={className}
+        className={cn(internalClassName, className)}
         href={href}
       >
         {children}
@@ -38,7 +39,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={className}
+      className={cn(internalClassName, className)}
       onClick={onClick}
     >
       {children}

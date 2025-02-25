@@ -39,8 +39,8 @@ export const HomeContent: React.FC = () => {
   return (
     <>
       <div className={s.mainCardButtons}>
-        <Button type="link" href="mobile">Continue with Mobile number</Button>
-        <Button type="link" theme="secondary" href="email">Continue with Email</Button>
+        <Button mode="link" href="mobile">Continue with Mobile number</Button>
+        <Button mode="link" theme="secondary" href="email">Continue with Email</Button>
       </div>
       <div className={s.mainCardDivider}>
         <span className={s.mainCardDividerLine} />
