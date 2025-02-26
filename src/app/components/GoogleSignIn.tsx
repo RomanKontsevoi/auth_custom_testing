@@ -1,6 +1,6 @@
 'use client'
 import { imagesPrefix } from 'app/consts'
-import { fetchUserData } from 'app/services/auth'
+import { fetchUserDataByGoogleCreds } from 'app/services/auth'
 import { AuthState, Tokens, useStore } from 'app/store'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
@@ -36,7 +36,7 @@ export const GoogleSignIn: React.FC<IGoogleSignInProps> = ({
   useEffect(() => {
     if (user?.email) {
       const getAndSaveUserData = async () => {
-        const tokens: Tokens = await fetchUserData(googleAccessToken)
+        const tokens: Tokens = await fetchUserDataByGoogleCreds(googleAccessToken)
 
         setTokens(tokens)
       }
