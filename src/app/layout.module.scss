@@ -7,11 +7,11 @@
     background-color: #FAFAFA;
     flex-direction: column;
     padding: 20px;
-  
+
     @media screen and (max-width: 500px) {
       padding: 16px;
     }
-  
+
     @media screen and (max-width: 430px) {
       padding: 10px;
     }
@@ -37,5 +37,9 @@
         @media screen and (max-width: 430px) {
             padding: 80px 16px;
         }
+    }
+
+    &Button {
+        margin-top: 40px;
     }
 }

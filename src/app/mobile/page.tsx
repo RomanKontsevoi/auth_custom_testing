@@ -1,18 +1,19 @@
 'use client'
 
 import { MobileForm } from 'app/mobile/components/MobileForm/MobileForm'
-import { useState } from 'react'
+import { OTPMobileForm } from 'app/mobile/components/OTPMobileForm/OTPMobileForm'
+import { useStore } from 'app/store'
 
 export default function MobileSignInPage() {
-  const [otpTime, setOtpTime] = useState(null)
+  const otpTime = useStore((state) => state.otpTime)
 
   if (!otpTime) {
     return (
-      <MobileForm setOtpTime={setOtpTime} />
+      <MobileForm />
     )
   }
 
   return (
-    <div>OTP Form</div>
+    <OTPMobileForm />
   )
 }

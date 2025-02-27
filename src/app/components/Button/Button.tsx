@@ -1,7 +1,7 @@
 import s from './Button.module.scss'
 import cn from 'classnames'
 import Link from 'next/link'
-import React from 'react'
+import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react'
 
 interface ButtonProps extends React.HTMLProps<HTMLButtonElement | HTMLAnchorElement> {
   theme?: 'primary' | 'secondary'
@@ -16,7 +16,8 @@ export const Button: React.FC<ButtonProps> = ({
   href,
   onClick,
   className,
-  children
+  children,
+  ...restProps
 }) => {
   const internalClassName = cn(s.button, {
     [s.buttonPrimary]: theme === 'primary',
@@ -32,6 +33,7 @@ export const Button: React.FC<ButtonProps> = ({
       <Link
         className={cn(internalClassName, className)}
         href={href}
+        {...restProps as React.HTMLProps<HTMLAnchorElement>}
       >
         {children}
       </Link>)
@@ -41,6 +43,7 @@ export const Button: React.FC<ButtonProps> = ({
     <button
       className={cn(internalClassName, className)}
       onClick={onClick}
+      {...restProps as DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>}
     >
       {children}
     </button>
