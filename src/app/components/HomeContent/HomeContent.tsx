@@ -4,10 +4,20 @@ import { AppleSignIn } from 'app/components/AppleSignIn'
 import { Button } from 'app/components/Button'
 import { FacebookSignIn } from 'app/components/FacebookSignIn'
 import { GoogleSignIn } from 'app/components/GoogleSignIn'
+import { Loader } from 'app/components/Loader'
 import s from 'app/page.module.scss'
+import { useLoadingStore } from 'app/store'
 import React from 'react'
 
 export const HomeContent: React.FC = () => {
+  const isLoginLoading = useLoadingStore((state) => state.isLoginLoading)
+
+  if (isLoginLoading) {
+    return (
+      <Loader className={s.mainCardLoading} isSecondary />
+    )
+  }
+
   return (
     <>
       <div className={s.mainCardButtons}>
