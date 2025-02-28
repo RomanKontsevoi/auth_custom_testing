@@ -43,7 +43,7 @@ export const GoogleSignIn: React.FC<IGoogleSignInProps> = ({
 
       getAndSaveUserData()
     }
-  }, [user?.email, googleAccessToken])
+  }, [user?.email, googleAccessToken, setTokens])
 
   const handleLoginButtonClick = async () => {
     if (session) {
