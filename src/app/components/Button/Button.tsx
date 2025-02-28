@@ -1,3 +1,4 @@
+import { Loader } from 'app/components/Loader'
 import s from './Button.module.scss'
 import cn from 'classnames'
 import Link from 'next/link'
@@ -8,6 +9,7 @@ interface ButtonProps extends React.HTMLProps<HTMLButtonElement | HTMLAnchorElem
   mode?: 'button' | 'link'
   href?: string
   onClick?: () => void
+  isLoading?: boolean
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -17,6 +19,7 @@ export const Button: React.FC<ButtonProps> = ({
   onClick,
   className,
   children,
+  isLoading = false,
   ...restProps
 }) => {
   const internalClassName = cn(s.button, {
@@ -45,7 +48,7 @@ export const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       {...restProps as DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>}
     >
-      {children}
+      {isLoading ? <Loader className={s.buttonLoader} /> : children}
     </button>
   )
 }

@@ -2,10 +2,10 @@ import { Button } from 'app/components/Button'
 import { FormFieldError } from 'app/components/FormFieldError'
 import { Slot } from 'app/mobile/components/OTPMobileForm/Slot'
 import { loginByMobile } from 'app/services/auth'
-import { useAuthStore } from 'app/store'
+import { useAuthStore, useLoadingStore } from 'app/store'
 import { OTPInput } from 'input-otp'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Controller, FieldValues, useForm, Validate } from 'react-hook-form'
 import s from './OTPMobileForm.module.scss'
 
@@ -15,6 +15,7 @@ export const OTPMobileForm: React.FC = () => {
   const mobile = useAuthStore((state) => state.mobile)
   const otpTime = useAuthStore((state) => state.otpTime)
   const resetOtpFlow = useAuthStore((state) => state.resetOtpFlow)
+  const isLoginLoading = useLoadingStore((state) => state.isLoginLoading)
   const setTokens = useAuthStore((state) => state.setTokens)
   const router = useRouter()
 
@@ -49,16 +50,17 @@ export const OTPMobileForm: React.FC = () => {
 
     const { data: tokens } = res
 
+    console.log({ tokens })
+
     setTokens(tokens)
 
     router.push('/')
   })
 
 
-  const isButtonDisabled = () => {
-    // Проверяем, есть ли ошибки или нет измененных значений
+  const isButtonDisabled = useMemo(() => {
     return Object.keys(errors).length > 0 || Object.keys(dirtyFields).length === 0
-  }
+  }, [errors, dirtyFields])
 
   return (
     <form onSubmit={handleFormSubmit}>
@@ -83,7 +85,14 @@ export const OTPMobileForm: React.FC = () => {
         )}
       />
       {errors.otp && <FormFieldError error={errors.otp} />}
-      <Button disabled={isButtonDisabled()} type="submit" className={s.submitButton}>Send</Button>
+      <Button
+        isLoading={isLoginLoading}
+        disabled={isButtonDisabled}
+        type="submit"
+        className={s.submitButton}
+      >
+        Send
+      </Button>
     </form>
   )
 }

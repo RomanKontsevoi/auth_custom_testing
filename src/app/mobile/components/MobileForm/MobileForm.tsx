@@ -2,7 +2,7 @@ import { Button } from 'app/components/Button'
 import { FormFieldError } from 'app/components/FormFieldError'
 import { Input } from 'app/components/Input'
 import { requestOtpMobile } from 'app/services/auth'
-import { useAuthStore } from 'app/store'
+import { useAuthStore, useLoadingStore } from 'app/store'
 import React from 'react'
 import { FieldValues, useForm, Validate } from 'react-hook-form'
 import s from './MobileForm.module.scss'
@@ -10,6 +10,7 @@ import s from './MobileForm.module.scss'
 export const MobileForm: React.FC = () => {
   const setOtpTime = useAuthStore((state) => state.setOtpTime)
   const setMobile = useAuthStore((state) => state.setMobile)
+  const isRequestOTPLoading = useLoadingStore((state) => state.isRequestOTPLoading)
 
   const {
     register,
@@ -49,9 +50,15 @@ export const MobileForm: React.FC = () => {
         type="tel"
         wrapperClassName={s.inputWrapper}
       />
-      {errors.phone && <FormFieldError error={errors.phone}/>}
+      {errors.phone && <FormFieldError error={errors.phone} />}
 
-      <Button type="submit" className={s.submitButton}>Send</Button>
+      <Button
+        isLoading={isRequestOTPLoading}
+        type="submit"
+        className={s.submitButton}
+      >
+        Send
+      </Button>
     </form>
   )
 }
