@@ -40,8 +40,6 @@ export default function RootLayout({
 
   }, [accessToken])
 
-  console.log({ accessToken })
-
   const handleLogOut = async () => {
     resetState()
     await signOut()

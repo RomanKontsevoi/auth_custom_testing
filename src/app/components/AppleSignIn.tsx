@@ -5,20 +5,29 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import React from 'react'
 
-const getAppleLoginURL = 'https://localhost:3001/api/v1/auth/custom/apple&returnTo=http://localhost:3000'
-
 interface IAppleleSignInProps {
   className?: string
+}
+
+interface IAppleSessionUser {
+  name: string
+  email: string
+  image: string
+}
+
+interface IAppleSession {
+  user: IAppleSessionUser,
+  expires: string
+  accessToken: string
 }
 
 export const AppleSignIn: React.FC<IAppleleSignInProps> = ({
   className,
 }) => {
   const { data: session } = useSession()
-  const setTokens = useAuthStore((state) => state.setTokens)
   const accessToken = useAuthStore((state) => state.accessToken)
 
-  const { user, accessToken: appleAccessToken } = session as unknown ?? {}
+  const { user, accessToken: appleAccessToken } = session as IAppleSession ?? {}
 
   console.log({ user, appleAccessToken, accessToken })
 

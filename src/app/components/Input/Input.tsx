@@ -15,8 +15,6 @@ export const Input: React.FC<InputProps> = ({
   ref,
   ...restProps
 }) => {
-  console.log({ type, wrapperClassName, restProps })
-
   return (
     <div className={cn(s.inputWrapper, wrapperClassName)}>
       {type === 'tel' ? (

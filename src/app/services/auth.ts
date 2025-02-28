@@ -1,9 +1,5 @@
 import { useLoadingStore } from 'app/store/loadings'
 
-const baseUrl = process.env.NEXT_PUBLIC_AAM_BACKEND_URL
-
-console.log({ baseUrl })
-
 export const fetchUserDataByGoogleCreds = async (googleAccessToken: string) => {
   const {setIsLoginLoading} = useLoadingStore.getState()
 
@@ -57,7 +53,6 @@ export const loginByMobile = async (options: LoginByMobileOptions) => {
   try {
     setIsLoginLoading(true);
 
-    console.log('requestOtpMobile');
     const res = await fetch(`${process.env.NEXT_PUBLIC_AAM_BACKEND_URL}/auth/custom/login/mobile`, {
       method: 'POST',
       headers: {

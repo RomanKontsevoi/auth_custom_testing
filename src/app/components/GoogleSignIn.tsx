@@ -31,8 +31,6 @@ export const GoogleSignIn: React.FC<IGoogleSignInProps> = ({
 
   const { user, accessToken: googleAccessToken } = session as IGoogleSession ?? {}
 
-  console.log({ user, accessToken })
-
   useEffect(() => {
     if (user?.email) {
       const getAndSaveUserData = async () => {
