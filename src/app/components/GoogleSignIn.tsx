@@ -27,7 +27,6 @@ export const GoogleSignIn: React.FC<IGoogleSignInProps> = ({
 }) => {
   const { data: session } = useSession()
   const setTokens = useAuthStore((state) => state.setTokens)
-  const accessToken = useAuthStore((state) => state.accessToken)
 
   const { user, accessToken: googleAccessToken } = session as IGoogleSession ?? {}
 
