@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from 'app/components/Button'
-import { useStore } from 'app/store'
+import { useAuthStore } from 'app/store'
 import { checkIsTokenExpired } from 'app/utils'
 import { SessionProvider } from 'next-auth/react'
 import { IBM_Plex_Sans } from 'next/font/google'
@@ -24,8 +24,8 @@ export default function RootLayout({
 }>) {
   const [isTokenValid, setIsTokenValid] = useState<boolean>(false)
 
-  const accessToken = useStore((state) => state.accessToken)
-  const resetState = useStore((state) => state.resetState)
+  const accessToken = useAuthStore((state) => state.accessToken)
+  const resetState = useAuthStore((state) => state.resetState)
 
   const router = useRouter()
 

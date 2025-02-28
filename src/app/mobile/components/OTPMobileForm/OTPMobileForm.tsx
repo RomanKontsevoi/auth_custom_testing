@@ -2,7 +2,7 @@ import { Button } from 'app/components/Button'
 import { FormFieldError } from 'app/components/FormFieldError'
 import { Slot } from 'app/mobile/components/OTPMobileForm/Slot'
 import { loginByMobile } from 'app/services/auth'
-import { useStore } from 'app/store'
+import { useAuthStore } from 'app/store'
 import { OTPInput } from 'input-otp'
 import { useRouter } from 'next/navigation'
 import React from 'react'
@@ -12,10 +12,10 @@ import s from './OTPMobileForm.module.scss'
 const OTP_LENGTH = 5
 
 export const OTPMobileForm: React.FC = () => {
-  const mobile = useStore((state) => state.mobile)
-  const otpTime = useStore((state) => state.otpTime)
-  const resetOtpFlow = useStore((state) => state.resetOtpFlow)
-  const setTokens = useStore((state) => state.setTokens)
+  const mobile = useAuthStore((state) => state.mobile)
+  const otpTime = useAuthStore((state) => state.otpTime)
+  const resetOtpFlow = useAuthStore((state) => state.resetOtpFlow)
+  const setTokens = useAuthStore((state) => state.setTokens)
   const router = useRouter()
 
   const {

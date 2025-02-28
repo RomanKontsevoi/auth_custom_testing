@@ -2,14 +2,14 @@ import { Button } from 'app/components/Button'
 import { FormFieldError } from 'app/components/FormFieldError'
 import { Input } from 'app/components/Input'
 import { requestOtpMobile } from 'app/services/auth'
-import { useStore } from 'app/store'
+import { useAuthStore } from 'app/store'
 import React from 'react'
 import { FieldValues, useForm, Validate } from 'react-hook-form'
 import s from './MobileForm.module.scss'
 
 export const MobileForm: React.FC = () => {
-  const setOtpTime = useStore((state) => state.setOtpTime)
-  const setMobile = useStore((state) => state.setMobile)
+  const setOtpTime = useAuthStore((state) => state.setOtpTime)
+  const setMobile = useAuthStore((state) => state.setMobile)
 
   const {
     register,

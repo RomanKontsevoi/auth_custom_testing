@@ -34,7 +34,7 @@ const defaultState: AuthState | null = {
   mustUpdateUserData: false,
 }
 
-export const useStore = create<Store>()(persist(
+export const useAuthStore = create<Store>()(persist(
   (set) => ({
     ...defaultState,
     setTokens: ({ accessToken, refreshToken, mustUpdateUserData }: Tokens & Partial<Record<'mustUpdateUserData', boolean>>) => set({

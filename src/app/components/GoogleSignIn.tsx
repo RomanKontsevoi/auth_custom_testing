@@ -1,7 +1,7 @@
 'use client'
 import { imagesPrefix } from 'app/consts'
 import { fetchUserDataByGoogleCreds } from 'app/services/auth'
-import { AuthState, Tokens, useStore } from 'app/store'
+import { Tokens, useAuthStore } from 'app/store'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import React, { useEffect } from 'react'
@@ -26,8 +26,8 @@ export const GoogleSignIn: React.FC<IGoogleSignInProps> = ({
   className
 }) => {
   const { data: session } = useSession()
-  const setTokens = useStore((state) => state.setTokens)
-  const accessToken = useStore((state) => state.accessToken)
+  const setTokens = useAuthStore((state) => state.setTokens)
+  const accessToken = useAuthStore((state) => state.accessToken)
 
   const { user, accessToken: googleAccessToken } = session as IGoogleSession ?? {}
 
