@@ -1,42 +1,58 @@
-.page {
-  display: flex;
-  width: 100%;
-  min-height: 100vh;
-  justify-content: center;
-  align-items: center;
-  background-color: #FAFAFA;
-  flex-direction: column;
-}
-
 .mainCard {
-  &Wrapper {
+  &Buttons {
+    margin-top: 56px;
     display: flex;
-    max-width: 500px;
-    margin: auto;
-    background-color: #fff;
+    gap: 20px;
+    flex-direction: column;
+  }
+
+  &Divider {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+
+    &Line {
+      flex: 1;
+      height: 1px;
+      background-color: #E6E6E6;
+    }
+
+    &Text {
+      border-width: 0;
+      border-style: solid;
+      border-color: #e5e7eb;
+      font-size: 14px;
+    }
   }
 
   &Social {
     &Wrapper {
       display: flex;
-      gap: 1rem;
-      justify-content: center;
+      gap: 16px;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
     }
-  }
-}
 
-.footer {
-  //grid-row-start: 3;
-  display: flex;
-  gap: 24px;
+    &Button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      font-size: 16px;
+      height: 44px;
+      padding: 0 16px;
+      border: 1px solid #E6E6E6;
+      background-color: #fff;
+      border-radius: 8px;
 
-  a {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  img {
-    flex-shrink: 0;
+      &:hover {
+        cursor: pointer;
+        transition: background-color .2s, color .2s, border-color .2s;
+        border: 1px solid #00383D;
+      }
+    }
   }
 }

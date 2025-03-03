@@ -1,0 +1,17 @@
+.mainCard {
+    &Header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    
+        &Left {
+          height: 40px;
+        }
+    
+        &Right {
+          display: flex;
+          justify-content: space-between;
+          gap: 12px;
+        }
+    }
+}
