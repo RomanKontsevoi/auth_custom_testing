@@ -28,14 +28,20 @@ const authOptions: NextAuthOptions = {
       console.log('Redirect Callback', { url, baseUrl });
       return url.startsWith(baseUrl) ? url : baseUrl;
     },
-    async session({ session, user, token }) {
-      console.log('Session Callback', { session, user, token });
-      return session;
+    async jwt({ token, account }) {
+      console.log('Jwt', { token, account });
+      // Persist the OAuth access_token to the token right after signin
+      if (account) {
+        token.accessToken = account.access_token
+      }
+      return token
     },
-    async jwt({ token, user, account, profile }) {
-      console.log('JWT Callback', { token, user, account, profile });
-      return token;
-    },
+    async session({ session, token, /*user*/ }) {
+      console.log('Session', { session, token });
+      // Send properties to the client, like an access_token from a provider.
+      session.accessToken = token.accessToken
+      return session
+    }
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
