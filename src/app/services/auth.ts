@@ -6,10 +6,10 @@ export const fetchUserDataByGoogleCreds = async (googleAccessToken: string) => {
   try {
     setIsLoginLoading(true)
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_AAM_BACKEND_URL}/auth/custom/login/google`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_AAM_BACKEND_URL}/auth/login/google`, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${googleAccessToken}`
+        auth_token: googleAccessToken
       }
     })
     return await res.json()
@@ -53,7 +53,7 @@ export const loginByMobile = async (options: LoginByMobileOptions) => {
   try {
     setIsLoginLoading(true);
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_AAM_BACKEND_URL}/auth/custom/login/mobile`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_AAM_BACKEND_URL}/auth/login/mobile`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

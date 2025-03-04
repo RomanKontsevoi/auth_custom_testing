@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { devtools } from 'zustand/middleware'
 
 interface LoadingState {
   isLoginLoading: boolean
@@ -10,9 +11,11 @@ interface Store extends LoadingState {
   setIsRequestOTPLoading: (isLoginLoading: boolean) => void
 }
 
-export const useLoadingStore = create<Store>((set) => ({
-  isLoginLoading: false,
-  isRequestOTPLoading: false,
-  setIsLoginLoading: (isLoginLoading: boolean) => set({ isLoginLoading }),
-  setIsRequestOTPLoading: (isRequestOTPLoading: boolean) => set({ isRequestOTPLoading })
-}));
+export const useLoadingStore = create<Store>()(
+  devtools((set) => ({
+    isLoginLoading: false,
+    isRequestOTPLoading: false,
+    setIsLoginLoading: (isLoginLoading: boolean) => set({ isLoginLoading }),
+    setIsRequestOTPLoading: (isRequestOTPLoading: boolean) => set({ isRequestOTPLoading })
+  }))
+);

@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { persist, createJSONStorage } from 'zustand/middleware'
+import { persist, createJSONStorage, devtools } from 'zustand/middleware'
 
 export type User = Record<string, string> | null
 
@@ -35,7 +35,7 @@ const defaultState: AuthState | null = {
 }
 
 export const useAuthStore = create<Store>()(persist(
-  (set) => ({
+  devtools((set) => ({
     ...defaultState,
     setTokens: ({ accessToken, refreshToken, mustUpdateUserData }) => set({
       accessToken,
@@ -53,7 +53,7 @@ export const useAuthStore = create<Store>()(persist(
     setMobile: (mobile) => set({ mobile }),
     resetOtpFlow: () => set({ otpTime: null, mobile: null }),
     resetState: () => set(defaultState),
-  }),
+  })),
   {
     name: 'auth-storage',
     storage: createJSONStorage(() => sessionStorage),
