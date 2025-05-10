@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { persist, createJSONStorage } from 'zustand/middleware'
+import { persist, createJSONStorage, devtools } from 'zustand/middleware'
 
 export type User = Record<string, string> | null
 
@@ -19,7 +19,7 @@ interface Store extends AuthState {
   setTokens: (tokens: Tokens & Partial<Record<'mustUpdateUserData', boolean>>) => void
   resetTokens: () => void
   setUser: (user: User) => void
-  setOtpTime: (otpTime: string) => void
+  setOtpTime: (otpTime: string | null) => void
   setMobile: (mobile: string) => void
   resetOtpFlow: () => void
   resetState: () => void
@@ -34,10 +34,10 @@ const defaultState: AuthState | null = {
   mustUpdateUserData: false,
 }
 
-export const useStore = create<Store>()(persist(
-  (set) => ({
+export const useAuthStore = create<Store>()(persist(
+  devtools((set) => ({
     ...defaultState,
-    setTokens: ({ accessToken, refreshToken, mustUpdateUserData }: Tokens & Partial<Record<'mustUpdateUserData', boolean>>) => set({
+    setTokens: ({ accessToken, refreshToken, mustUpdateUserData }) => set({
       accessToken,
       refreshToken,
       mustUpdateUserData: mustUpdateUserData ?? false,
@@ -46,14 +46,14 @@ export const useStore = create<Store>()(persist(
       accessToken: null,
       refreshToken: null
     }),
-    setUser: (user: User) => set({
+    setUser: (user) => set({
       user
     }),
-    setOtpTime: (otpTime: string) => set({ otpTime }),
-    setMobile: (mobile: string) => set({ mobile }),
+    setOtpTime: (otpTime) => set({ otpTime }),
+    setMobile: (mobile) => set({ mobile }),
     resetOtpFlow: () => set({ otpTime: null, mobile: null }),
     resetState: () => set(defaultState),
-  }),
+  })),
   {
     name: 'auth-storage',
     storage: createJSONStorage(() => sessionStorage),

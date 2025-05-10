@@ -4,10 +4,23 @@ import { AppleSignIn } from 'app/components/AppleSignIn'
 import { Button } from 'app/components/Button'
 import { FacebookSignIn } from 'app/components/FacebookSignIn'
 import { GoogleSignIn } from 'app/components/GoogleSignIn'
+import { Loader } from 'app/components/Loader'
+import { useGoogleSignIn } from 'app/hooks'
 import s from 'app/page.module.scss'
+import { useLoadingStore } from 'app/store'
 import React from 'react'
 
 export const HomeContent: React.FC = () => {
+  const isLoginLoading = useLoadingStore((state) => state.isLoginLoading)
+
+  const { handleGoogleLoginButtonClick } = useGoogleSignIn()
+
+  if (isLoginLoading) {
+    return (
+      <Loader className={s.mainCardLoading} isSecondary />
+    )
+  }
+
   return (
     <>
       <div className={s.mainCardButtons}>
@@ -20,7 +33,9 @@ export const HomeContent: React.FC = () => {
         <span className={s.mainCardDividerLine} />
       </div>
       <div className={s.mainCardSocialWrapper}>
-        <GoogleSignIn className={s.mainCardSocialButton} />
+        <GoogleSignIn
+          onClickAction={handleGoogleLoginButtonClick} className={s.mainCardSocialButton}
+        />
         <FacebookSignIn className={s.mainCardSocialButton} />
         <AppleSignIn className={s.mainCardSocialButton} />
       </div>

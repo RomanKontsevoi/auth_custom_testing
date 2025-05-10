@@ -1,60 +1,19 @@
 'use client'
 import { imagesPrefix } from 'app/consts'
-import { fetchUserDataByGoogleCreds } from 'app/services/auth'
-import { AuthState, Tokens, useStore } from 'app/store'
-import { signIn, signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
-import React, { useEffect } from 'react'
+import React from 'react'
 
 interface IGoogleSignInProps {
   className?: string
-}
-
-interface IGoogleSessionUser {
-  name: string
-  email: string
-  image: string
-}
-
-interface IGoogleSession {
-  user: IGoogleSessionUser,
-  expires: string
-  accessToken: string
+  onClickAction: () => void
 }
 
 export const GoogleSignIn: React.FC<IGoogleSignInProps> = ({
-  className
+  className,
+  onClickAction
 }) => {
-  const { data: session } = useSession()
-  const setTokens = useStore((state) => state.setTokens)
-  const accessToken = useStore((state) => state.accessToken)
-
-  const { user, accessToken: googleAccessToken } = session as IGoogleSession ?? {}
-
-  console.log({ user, accessToken })
-
-  useEffect(() => {
-    if (user?.email) {
-      const getAndSaveUserData = async () => {
-        const tokens: Tokens = await fetchUserDataByGoogleCreds(googleAccessToken)
-
-        setTokens(tokens)
-      }
-
-      getAndSaveUserData()
-    }
-  }, [user?.email, googleAccessToken])
-
-  const handleLoginButtonClick = async () => {
-    if (session) {
-      await signOut()
-    }
-
-    await signIn('google')
-  }
-
   return (
-    <button className={className} onClick={handleLoginButtonClick}>
+    <button className={className} onClick={onClickAction}>
       <Image
         width={24}
         height={24}
